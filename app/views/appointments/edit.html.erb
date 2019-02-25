@@ -1,0 +1,15 @@
+<h4>Edit Appointment</h4>
+
+<%= form_for @appointment do |f| %>
+
+<%= buyer_id_field(@appointment) %>
+<br><br>
+
+<!-- select from existing listings -->
+<%= f.collection_select :listing_street, Listing.all, :street, :street, :include_blank => "Select Listing"%><br><br>
+
+Appointment Date:
+<!-- shows original appointment date as human readable date -->
+<%= f.text_field :date, :value => f.object.date.strftime('%b %d, %Y')%><br><br>
+<%= f.submit %>
+<% end %>

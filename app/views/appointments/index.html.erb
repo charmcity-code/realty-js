@@ -1,0 +1,9 @@
+<h4>Appointments</h4>
+
+<% @appointments.each do |a| %>
+  <ul>
+    <li>
+      Realtor:
+      <%= a.listing.user.email %><br>
+      <%= render partial: 'appointments', locals: {a: a} %>
+<% end %>

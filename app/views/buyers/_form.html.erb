@@ -1,0 +1,8 @@
+<%= form_for @buyer do |f| %>
+  <%= f.label :name %>
+  <div><%= f.text_field :name %></div>
+  <%= f.label :email %>
+  <div><%= f.text_field :email %></div>
+  <br>
+  <%= f.submit %>
+<% end %>

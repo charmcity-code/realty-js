@@ -1,0 +1,15 @@
+<h4>Create New Appointment</h4>
+
+<%= form_for @appointment do |f| %>
+
+  <!-- from appointments_helper -->
+  <%= buyer_id_field(@appointment) %>
+  <br><br>
+
+  <!-- select from existing listings -->
+  <%= f.collection_select :listing_street, Listing.all, :street, :street, :include_blank => "Select Listing"%><br><br>
+
+  Appointment Date:
+  <%= f.text_field :date, placeholder: 'Use natural language'%><br><br>
+  <%= f.submit %>
+<% end %>

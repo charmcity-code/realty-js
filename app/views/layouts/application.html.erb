@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>FiRealty 2.0</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all'%>
+  <%= javascript_include_tag 'application' %>
+</head>
+<div class="wrapper">
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">FiRealty</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+
+          <% if logged_in? %>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Appointments
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="<%= new_appointment_url %>">New Appointment</a>
+              <a class="dropdown-item" href="<%= appointments_url %>">View Appointments</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Listings
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="<%= new_listing_url %>">New Listing</a>
+              <a class="dropdown-item" href="<%= listings_url %>">View Listings</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Buyers
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="<%= new_buyer_url %>">New Buyer</a>
+              <a class="dropdown-item" href="<%= buyers_url %>">View Buyers</a>
+            </div>
+          </li>
+
+          <li class="nav-item"><a class="nav-link" href="<%= user_url(current_user.id) %>">
+              <%= current_user.email %></a></li>
+
+          <li class="nav-item"><a class="nav-link" data-method="delete" href="<%= logout_path %>">Logout</a></li>
+
+          <% else %>
+
+          <li class="nav-item"><a class="nav-link" href="<%= login_path %>">Log In</a></li>
+
+          <li class="nav-item"><a class="nav-link" href="<%= signup_path %>">Sign Up</a></li>
+
+          <li class="nav-item"><a class="nav-link" href="/auth/github">GitHub Log In</a></li>
+
+          <% end %>
+
+        </ul>
+      </div>
+    </nav>
+
+    <!-- displays flash messages -->
+    <div class="errors">
+      <%= flash[:message] if flash[:message] %>
+    </div>
+
+    <%= yield %>
+  </body>
+</div>
+
+</html>

@@ -1,0 +1,11 @@
+Buyer:
+<%= link_to a.buyer.name, buyer_appointments_path(a.buyer) %><br>
+Property Location:<br>
+<%= a.listing.street %><br>
+Date:
+<%= parsed_date a %>
+at
+<%= localtime a %><br>
+<%= link_to "Details", appointment_path(a) %>
+</li>
+</ul>
