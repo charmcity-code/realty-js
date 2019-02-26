@@ -1,18 +1,3 @@
 <h4>Listings Index</h4>
 
 <div id="ajax-listings"></div>
-
-<% @listings.each do |l| %>
-  <ul>
-    <li>
-      Date Listed:
-      <%= localdate l %><br>
-      Property Location:<br>
-      <%= l.street %><br>
-      <%= l.city %>,
-      <%= l.state %>
-      <%= l.zip_code %><br>
-      <%= link_to "Details", listing_path(l) %>
-    </li>
-  </ul>
-<% end %>
