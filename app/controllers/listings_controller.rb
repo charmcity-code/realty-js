@@ -24,6 +24,10 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find_by(id: params[:id])
+    respond_to do |f|
+			f.html {render :show}
+			f.json {render json: @listing}
+		end
   end
 
   def edit
