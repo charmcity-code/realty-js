@@ -1,6 +1,16 @@
 <h4>Listing Details</h4>
 
-Date Listed:
+<div class="listingDate">Date Listed: </div><br>
+<div class="listingStreet">Property Location: <br></div>
+<div class="listingCityStZip"></div><br>
+
+<div class="listingPropertyType">Property Type: </div>
+<div class="numberBedrooms">Numbers of Bedrooms: </div>
+<div class="numberBathrooms">Number of Bathrooms: </div>
+<div class="listingPrice">List Price: $</div>
+
+
+<br>oldDate Listed:
 <%= localdate @listing %><br><br>
 
 Property Location:<br>
@@ -22,3 +32,5 @@ List Price:
 
 <%= link_to 'Edit', edit_listing_path %><br>
 <%= link_to 'Delete', listing_path(@listing), method: :delete %>
+
+<button class="js-next">Next...</button>
