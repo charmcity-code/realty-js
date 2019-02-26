@@ -1,6 +1,15 @@
 $(function() {
   getListings();
+  showListing();
+  listenForClick();
 });
+
+const listenForClick = () => {
+  $(".js-next").click(function(e) {
+    e.preventDefault();
+    alert("test!");
+  });
+};
 
 const getListings = () => {
   $.ajax({
@@ -44,4 +53,26 @@ Listing.prototype.listingHTML = function() {
     </li>
     </ul
   `;
+};
+
+const showListing = listingId => {
+  $.ajax({
+    type: "get",
+    url: `/listings/${listingId}`,
+    dataType: "json",
+    success: function(response) {
+      $(".listingDate").append(
+        moment(response.created_at).format("MMM DD, YYYY")
+      );
+      $(".listingStreet").append(response.street);
+      $(".listingCityStZip").append(
+        `${response.city}, ${response.state} ${response.zip_code}`
+      );
+      $(".listingPropertyType").append(response.property_type);
+      console.log(response.street);
+      $(".numberBedrooms").append(response.bedrooms);
+      $(".numberBathrooms").append(response.bathrooms);
+      $(".listingPrice").append(response.list_price.toLocaleString("en"));
+    }
+  });
 };
