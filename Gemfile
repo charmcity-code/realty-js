@@ -31,6 +31,7 @@ gem 'omniauth-github'
 gem 'dotenv-rails'
 gem 'seed_dump'
 gem 'active_model_serializers'
+gem 'momentjs-rails'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
