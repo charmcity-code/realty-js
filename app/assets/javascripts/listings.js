@@ -36,7 +36,7 @@ Listing.prototype.listingHTML = function() {
   return `
     <ul>
     <li>
-      Date Listed: ${this.created_at}<br>
+      Date Listed: ${moment(this.created_at).format("MMM DD, YYYY")}<br>
       Property Location:<br>
       ${this.street}<br>
       ${this.city}, ${this.state} ${this.zip_code}
