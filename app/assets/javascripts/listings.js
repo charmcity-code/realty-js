@@ -2,12 +2,21 @@ $(function() {
   getListings();
   showListing();
   listenForClick();
+  listenDetails();
 });
 
 const listenForClick = () => {
   $(".js-next").click(function(e) {
     e.preventDefault();
     alert("test!");
+  });
+};
+
+const listenDetails = () => {
+  $(".js-details").click(function(e) {
+    e.preventDefault();
+    console.log("hello");
+    alert("hello!");
   });
 };
 
@@ -49,7 +58,7 @@ Listing.prototype.listingHTML = function() {
       Property Location:<br>
       ${this.street}<br>
       ${this.city}, ${this.state} ${this.zip_code}<br>
-      <a href="/listings/${this.id}">Details</a>
+      <span class="js-details"><a href="/listings/${this.id}">Details</a></span>
     </li>
     </ul
   `;
@@ -58,7 +67,7 @@ Listing.prototype.listingHTML = function() {
 const showListing = listingId => {
   $.ajax({
     type: "get",
-    url: `/listings/${listingId}`,
+    url: `/listings/${this.id}`,
     dataType: "json",
     success: function(response) {
       $(".listingDate").append(
