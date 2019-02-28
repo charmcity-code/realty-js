@@ -9,28 +9,7 @@
 <div class="numberBathrooms">Number of Bathrooms: </div>
 <div class="listingPrice">List Price: $</div>
 
-
-<br>oldDate Listed:
-<%= localdate @listing %><br><br>
-
-Property Location:<br>
-<%= @listing.street %><br>
-<%= @listing.city %>,
-<%= @listing.state %>
-<%= @listing.zip_code %><br><br>
-
-Property Type:
-<%= @listing.property_type %><br>
-Number of Bedrooms:
-<%= @listing.bedrooms %><br>
-Number of Bathrooms:
-<%= @listing.bathrooms %><br><br>
-
-List Price:
-<%= number_to_currency(@listing.list_price, precision: 0) %>
-<br>
-
 <%= link_to 'Edit', edit_listing_path %><br>
-<%= link_to 'Delete', listing_path(@listing), method: :delete %>
+<%= link_to 'Delete', listing_path(@listing), method: :delete, data: { confirm: 'Are you sure?' } %>
 
 <button class="js-next">Next...</button>
