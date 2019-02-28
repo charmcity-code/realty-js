@@ -1,15 +1,15 @@
 <h4>Listing Details</h4>
 
-<div class="listingDate">Date Listed: </div><br>
-<div class="listingStreet">Property Location: <br></div>
-<div class="listingCityStZip"></div><br>
+<div id="listingDate">Date Listed: </div><br>
+<div id="listingStreet">Property Location: <br></div>
+<div id="listingCityStZip"></div><br>
 
-<div class="listingPropertyType">Property Type: </div>
-<div class="numberBedrooms">Numbers of Bedrooms: </div>
-<div class="numberBathrooms">Number of Bathrooms: </div>
-<div class="listingPrice">List Price: $</div>
+<div id="listingPropertyType">Property Type: </div>
+<div id="numberBedrooms">Numbers of Bedrooms: </div>
+<div id="numberBathrooms">Number of Bathrooms: </div>
+<div id="listingPrice">List Price: $</div>
 
 <%= link_to 'Edit', edit_listing_path %><br>
 <%= link_to 'Delete', listing_path(@listing), method: :delete, data: { confirm: 'Are you sure?' } %>
 
-<button class="js-next">Next...</button>
+<button id="js-next">Next...</button>
