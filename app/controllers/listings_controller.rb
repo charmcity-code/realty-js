@@ -40,11 +40,6 @@ class ListingsController < ApplicationController
     redirect_to listing_path(@listing)
   end
 
-  def destroy
-    @listing = Listing.find(params[:id]).destroy
-    redirect_to listings_path
-  end
-
   private
 
   def listing_params
