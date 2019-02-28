@@ -5,7 +5,7 @@ $(function() {
 });
 
 const listenForClick = () => {
-  $(".js-next").click(function(e) {
+  $("#js-next").click(function(e) {
     e.preventDefault();
     alert("test!");
   });
