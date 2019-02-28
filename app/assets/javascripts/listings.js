@@ -1,11 +1,11 @@
 $(function() {
   getListings();
-  showListing();
+  // showListing();
   listenForClick();
 });
 
 const listenForClick = () => {
-  $("#js-next").click(function(e) {
+  $(".js-next").click(function(e) {
     e.preventDefault();
     alert("test!");
   });
@@ -61,17 +61,17 @@ const showListing = () => {
     url: this.href,
     dataType: "json",
     success: function(response) {
-      $("#listingDate").append(
+      $(".listingDate").append(
         moment(response.created_at).format("MMM DD, YYYY")
       );
-      $("#listingStreet").append(response.street);
-      $("#listingCityStZip").append(
+      $(".listingStreet").append(response.street);
+      $(".listingCityStZip").append(
         `${response.city}, ${response.state} ${response.zip_code}`
       );
-      $("#listingPropertyType").append(response.property_type);
-      $("#numberBedrooms").append(response.bedrooms);
-      $("#numberBathrooms").append(response.bathrooms);
-      $("#listingPrice").append(response.list_price.toLocaleString("en"));
+      $(".listingPropertyType").append(response.property_type);
+      $(".numberBedrooms").append(response.bedrooms);
+      $(".numberBathrooms").append(response.bathrooms);
+      $(".listingPrice").append(response.list_price.toLocaleString("en"));
     }
   });
 };
