@@ -1,23 +1,21 @@
 <h4>Listing Details</h4>
 
-
 <div class="listingDate">Date Listed: <%= localdate @listing %></div><br>
 
 Property Location:
-<div class="listingStreet"><%= @listing.street %><div>
+<div class="listingStreet"><%= @listing.street %></div>
 <div class="listingCityStZip"><%= @listing.city %>,
   <%= @listing.state %>
-  <%= @listing.zip_code %><div><br>
+  <%= @listing.zip_code %></div><br>
 
 
-<div class="listingPropertyType">Property Type: <%= @listing.property_type %><div>
+<div class="listingPropertyType">Property Type: <%= @listing.property_type %></div>
 
 <div class="numberBedrooms">Number of Bedrooms: <%= @listing.bedrooms %></div>
-<div class="numberBathrooms">Number of Bathrooms:
-<%= @listing.bathrooms %></div><br>
+<div class="numberBathrooms">Number of Bathrooms: <%= @listing.bathrooms %></div><br>
 
-<div class="listingPrice">List Price: <%= number_to_currency(@listing.list_price, precision: 0) %></div>
+<div class="listingPrice">List Price: <%= number_to_currency(@listing.list_price, precision: 0) %></div><br>
 
 <%= link_to 'Edit', edit_listing_path %><br><br>
 
-<button class="js-next">Next...</button>
+<button class="js-next" data-id="<%=@listing.id%>">Next...</button>
