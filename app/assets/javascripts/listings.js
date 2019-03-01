@@ -1,15 +1,7 @@
 $(function() {
   getListings();
-  // showListing();
-  listenForClick();
+  showListing();
 });
-
-const listenForClick = () => {
-  $(".js-next").click(function(e) {
-    e.preventDefault();
-    alert("test!");
-  });
-};
 
 const getListings = () => {
   $.ajax({
@@ -56,22 +48,28 @@ Listing.prototype.listingHTML = function() {
 };
 
 const showListing = () => {
-  $.ajax({
-    type: "get",
-    url: this.href,
-    dataType: "json",
-    success: function(response) {
-      $(".listingDate").append(
-        moment(response.created_at).format("MMM DD, YYYY")
+  $(".js-next").click(function(e) {
+    e.preventDefault();
+    let nextId = parseInt($(".js-next").attr("data-id")) + 1;
+
+    $.getJSON("/listings/" + nextId, function(response) {
+      $(".listingDate").text(
+        "Date Listed: " + moment(response.created_at).format("MMM DD, YYYY")
       );
-      $(".listingStreet").append(response.street);
-      $(".listingCityStZip").append(
+      $(".listingStreet").text(response.street);
+      $(".listingCityStZip").text(
         `${response.city}, ${response.state} ${response.zip_code}`
       );
-      $(".listingPropertyType").append(response.property_type);
-      $(".numberBedrooms").append(response.bedrooms);
-      $(".numberBathrooms").append(response.bathrooms);
-      $(".listingPrice").append(response.list_price.toLocaleString("en"));
-    }
+      $(".listingPropertyType").text(
+        "Property Type: " + response.property_type
+      );
+      $(".numberBedrooms").text("Number of Bedrooms: " + response.bedrooms);
+      $(".numberBathrooms").text("Number of Bathrooms: " + response.bathrooms);
+      $(".listingPrice").text(
+        "List Price: $" + response.list_price.toLocaleString("en")
+      );
+      // re-set the id to current on the link
+      $(".js-next").attr("data-id", response["id"]);
+    });
   });
 };
