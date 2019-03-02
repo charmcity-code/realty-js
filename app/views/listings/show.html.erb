@@ -23,16 +23,23 @@ Property Location:
 
 <button class="js-next" data-id="<%=@listing.id%>">Next...</button><br>
 
-
 <h6>Appointments for Listing</h6>
-<% if !@listing.appointments.empty? %>
-   <% @listing.appointments.each do |a| %>
-    <div class="appointmentName">Buyer: <%= a.buyer.name %></div>
-    <div class="appointmentDate">Date: <%= a.date.strftime('%b %d, %Y') %></div><br>
-  <% end %>
-<% else %>
-  <%= "There are no appointments for this listing." %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <% if !@listing.appointments.empty? %>
+      <% @listing.appointments.each do |a| %>
+        <div class="appointmentName col-4">Buyer: <%= a.buyer.name %><br></div>
+        <div class="appointmentDate col-8">Date: <%= a.date.strftime('%b %d, %Y') %><br></div><br>
+      <% end %>
+    <% else %>
+      <%= "There are no appointments for this listing." %>
+    <% end %>
+
+
+  </div>
+</div>
+
+
 
 
 
