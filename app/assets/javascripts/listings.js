@@ -50,9 +50,12 @@ Listing.prototype.listingHTML = function() {
 const showListing = () => {
   $(".js-next").click(function(e) {
     e.preventDefault();
+    $(".appointmentName").text("");
+    $(".appointmentDate").text("");
     let nextId = parseInt($(".js-next").attr("data-id")) + 1;
 
     $.getJSON("/listings/" + nextId, function(response) {
+      // debugger;
       $(".listingDate").text(
         "Date Listed: " + moment(response.created_at).format("MMM DD, YYYY")
       );
@@ -68,6 +71,15 @@ const showListing = () => {
       $(".listingPrice").text(
         "List Price: $" + response.list_price.toLocaleString("en")
       );
+
+      for (let element of response.buyers) {
+        $(".appointmentName").append(element.name + `<br>`);
+      }
+
+      for (let element of response.appointments) {
+        $(".appointmentDate").append(element.date + `<br>`);
+      }
+
       // re-set the id to current on the link
       $(".js-next").attr("data-id", response["id"]);
     });
