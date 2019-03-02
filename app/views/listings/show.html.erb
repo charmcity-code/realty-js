@@ -1,3 +1,6 @@
+
+
+
 <h4>Listing Details</h4>
 
 <div class="listingDate">Date Listed: <%= localdate @listing %></div><br>
@@ -18,4 +21,18 @@ Property Location:
 
 <%= link_to 'Edit', edit_listing_path %><br><br>
 
-<button class="js-next" data-id="<%=@listing.id%>">Next...</button>
+<button class="js-next" data-id="<%=@listing.id%>">Next...</button><br>
+
+
+<h6>Appointments for Listing</h6>
+<% if !@listing.appointments.empty? %>
+   <% @listing.appointments.each do |a| %>
+    <div>Buyer: <%= a.buyer.name %></div>
+    <div>Date: <%= a.date %></div><br>
+  <% end %>
+<% else %>
+  <%= "no appointments" %>
+<% end %>
+
+
+
