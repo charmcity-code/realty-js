@@ -1,6 +1,6 @@
 $(function() {
   getListings();
-  showListing();
+  nextListing();
 });
 
 const getListings = () => {
@@ -47,7 +47,7 @@ Listing.prototype.listingHTML = function() {
   `;
 };
 
-const showListing = () => {
+const nextListing = () => {
   $(".js-next").click(function(e) {
     e.preventDefault();
     $(".appointmentName").text("");
