@@ -72,12 +72,20 @@ const showListing = () => {
         "List Price: $" + response.list_price.toLocaleString("en")
       );
 
-      for (let element of response.buyers) {
-        $(".appointmentName").append(element.name + `<br>`);
-      }
+      if (response.buyers.length !== 0) {
+        for (const element of response.buyers) {
+          $(".appointmentName").append(element.name + `<br>`);
+        }
 
-      for (let element of response.appointments) {
-        $(".appointmentDate").append(element.date + `<br>`);
+        for (const element of response.appointments) {
+          $(".appointmentDate").append(
+            moment(element.date).format("MMM DD, YYYY") + `<br>`
+          );
+        }
+      } else {
+        $(".appointmentName").append(
+          "There are no appointments for this listing."
+        );
       }
 
       // re-set the id to current on the link
