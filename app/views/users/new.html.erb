@@ -1,5 +1,4 @@
 <h4>Sign up</h4>
-
 <!-- displays validation errors -->
 <div class="errors">
   <% if @user.errors %>
@@ -8,7 +7,6 @@
     <% end %>
   <% end %>
 </div>
-
 <%= form_for @user do |f| %>
   <%= f.label :email %>
   <div><%= f.text_field :email %></div>

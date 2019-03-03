@@ -1,20 +1,18 @@
 <h4>Appointment Details</h4>
-
 Realtor:
 <%= current_user.email %><br>
 Buyer:
-<%= @appointment.buyer.name %><br><br>
-
+<%= @appointment.buyer.name %><br>
+<br>
 Property Location:<br>
 <%= @appointment.listing.street %><br>
 <%= @appointment.listing.city %>,
 <%= @appointment.listing.state %>
-<%= @appointment.listing.zip_code %><br><br>
-
+<%= @appointment.listing.zip_code %><br>
+<br>
 Date:
 <%= parsed_date @appointment %>
 at
 <%= localtime @appointment %><br>
-
 <%= link_to 'Edit', edit_appointment_path %><br>
 <%= link_to 'Delete', appointment_path(@appointment), method: :delete %>
