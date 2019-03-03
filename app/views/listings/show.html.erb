@@ -1,45 +1,41 @@
-
-
-
 <h4>Listing Details</h4>
-
-<div class="listingDate">Date Listed: <%= localdate @listing %></div><br>
-
+<div class="listingDate">Date Listed: <%= localdate @listing %></div>
+<br>
 Property Location:
 <div class="listingStreet"><%= @listing.street %></div>
 <div class="listingCityStZip"><%= @listing.city %>,
   <%= @listing.state %>
-  <%= @listing.zip_code %></div><br>
-
-
+  <%= @listing.zip_code %></div>
+<br>
 <div class="listingPropertyType">Property Type: <%= @listing.property_type %></div>
-
 <div class="listingBedrooms">Number of Bedrooms: <%= @listing.bedrooms %></div>
-<div class="listingBathrooms">Number of Bathrooms: <%= @listing.bathrooms %></div><br>
+<div class="listingBathrooms">Number of Bathrooms: <%= @listing.bathrooms %></div>
+<br>
+<div class="listingPrice">List Price: <%= number_to_currency(@listing.list_price, precision: 0) %></div>
+<br>
+<%= link_to 'Edit', edit_listing_path %><br>
+<br>
 
-<div class="listingPrice">List Price: <%= number_to_currency(@listing.list_price, precision: 0) %></div><br>
-
-<%= link_to 'Edit', edit_listing_path %><br><br>
-
-<button class="js-next" data-id="<%=@listing.id%>">Next...</button><br>
+<button class="js-next" data-id="<%=@listing.id%>">Next...</button><br><br>
 
 <h6>Appointments for Listing</h6>
 <div class="container">
   <div class="row">
-    <% if !@listing.appointments.empty? %>
-      <% @listing.appointments.each do |a| %>
-        <div class="appointmentName col-4">Buyer: <%= a.buyer.name %><br></div>
-        <div class="appointmentDate col-8">Date: <%= a.date.strftime('%b %d, %Y') %><br></div><br>
-      <% end %>
-    <% else %>
-      <%= "There are no appointments for this listing." %>
-    <% end %>
+    <div class="col-3">Buyer:</div>
+    <div class="col-8">Date:</div>
 
+    <% if !@listing.appointments.empty? %>
+      <% buyer_names = [] %>
+      <% appointment_dates = [] %>
+      <% @listing.appointments.each do |a| %>
+        <% buyer_names << a.buyer.name %>
+        <% appointment_dates << a.date.strftime('%b %d, %Y') %>
+      <% end %>
+      <div class="appointmentName col-3"><%= buyer_names.join("\n") %></div>
+      <div class="appointmentDate col-8"><%= appointment_dates.join("\n") %></div>
+    <% else %>
+      <div class="col-12">There are no appointments for this listing.</div>
+    <% end %>
 
   </div>
 </div>
-
-
-
-
-
