@@ -1,7 +1,10 @@
 $(function() {
   getListings();
   nextListing();
+  previousListing();
 });
+
+let nextId;
 
 const getListings = () => {
   $.ajax({
@@ -48,48 +51,55 @@ Listing.prototype.listingHTML = function() {
 };
 
 const nextListing = () => {
-  $(".js-next").click(function(e) {
-    e.preventDefault();
-    $(".appointmentName").text("");
-    $(".appointmentDate").text("");
-    let nextId = parseInt($(".js-next").attr("data-id")) + 1;
+  $(".js-next").click(() => {
+    nextId = parseInt($(".js-next").attr("data-id")) + 1;
+    showListing();
+  });
+};
 
-    $.getJSON("/listings/" + nextId, function(response) {
-      // debugger;
-      $(".listingDate").text(
-        "Date Listed: " + moment(response.created_at).format("MMM DD, YYYY")
-      );
-      $(".listingStreet").text(response.street);
-      $(".listingCityStZip").text(
-        `${response.city}, ${response.state} ${response.zip_code}`
-      );
-      $(".listingPropertyType").text(
-        "Property Type: " + response.property_type
-      );
-      $(".numberBedrooms").text("Number of Bedrooms: " + response.bedrooms);
-      $(".numberBathrooms").text("Number of Bathrooms: " + response.bathrooms);
-      $(".listingPrice").text(
-        "List Price: $" + response.list_price.toLocaleString("en")
-      );
+const previousListing = () => {
+  $(".js-previous").click(() => {
+    nextId = parseInt($(".js-next").attr("data-id")) - 1;
+    showListing();
+  });
+};
 
-      if (response.buyers.length !== 0) {
-        for (const element of response.buyers) {
-          $(".appointmentName").append(element.name + `<br>`);
-        }
+const showListing = () => {
+  $(".appointmentName").text("");
+  $(".appointmentDate").text("");
 
-        for (const element of response.appointments) {
-          $(".appointmentDate").append(
-            moment(element.date).format("MMM DD, YYYY") + `<br>`
-          );
-        }
-      } else {
-        $(".appointmentName").append(
-          "There are no appointments for this listing."
-        );
+  $.getJSON("/listings/" + nextId, function(response) {
+    $(".listingDate").text(
+      "Date Listed: " + moment(response.created_at).format("MMM DD, YYYY")
+    );
+    $(".listingStreet").text(response.street);
+    $(".listingCityStZip").text(
+      `${response.city}, ${response.state} ${response.zip_code}`
+    );
+    $(".listingPropertyType").text("Property Type: " + response.property_type);
+    $(".numberBedrooms").text("Number of Bedrooms: " + response.bedrooms);
+    $(".numberBathrooms").text("Number of Bathrooms: " + response.bathrooms);
+    $(".listingPrice").text(
+      "List Price: $" + response.list_price.toLocaleString("en")
+    );
+
+    if (response.buyers.length !== 0) {
+      for (const element of response.buyers) {
+        $(".appointmentName").append(element.name + `<br>`);
       }
 
-      // re-set the id to current on the link
-      $(".js-next").attr("data-id", response["id"]);
-    });
+      for (const element of response.appointments) {
+        $(".appointmentDate").append(
+          moment(element.date).format("MMM DD, YYYY") + `<br>`
+        );
+      }
+    } else {
+      $(".appointmentName").append(
+        "There are no appointments for this listing."
+      );
+    }
+
+    // re-set the id to current on the link
+    $(".js-next").attr("data-id", response["id"]);
   });
 };
