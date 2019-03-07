@@ -8,18 +8,19 @@ class ListingsController < ApplicationController
     @listing = Listing.new(listing_params)
 
     if @listing.save
-      redirect_to listing_path(@listing)
-    else
-      render new_listing_path
+      render json: @listing, status: 201
     end
   end
 
   def index
+    @listing = Listing.new
     @listings = Listing.all
+
     respond_to do |f|
 			f.html {render :index}
 			f.json {render json: @listings}
-		end
+    end
+
   end
 
   def show
