@@ -19,6 +19,7 @@ const getListings = () => {
       });
     }
   });
+  createListing();
 };
 
 class Listing {
@@ -35,6 +36,22 @@ class Listing {
     this.created_at = obj.created_at;
   }
 }
+
+const createListing = () => {
+  $("form").submit(function(e) {
+    e.preventDefault();
+
+    let values = $(this).serialize();
+    let newListing = $.post("/listings", values);
+
+    newListing.done(function(response) {
+      let listing = response;
+      const newListing = new Listing(listing);
+      const newListingHtml = newListing.listingHTML();
+      document.getElementById("ajax-listings").innerHTML += newListingHtml;
+    });
+  });
+};
 
 Listing.prototype.listingHTML = function() {
   return `
