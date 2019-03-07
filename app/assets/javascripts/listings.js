@@ -49,6 +49,7 @@ const createListing = () => {
       const newListing = new Listing(listing);
       const newListingHtml = newListing.listingHTML();
       document.getElementById("ajax-listings").innerHTML += newListingHtml;
+      $("form").trigger("reset");
     });
   });
 };
@@ -115,7 +116,6 @@ const showListing = () => {
         "There are no appointments for this listing."
       );
     }
-
     // re-set the id to current on the link
     $(".js-next").attr("data-id", response["id"]);
   });
