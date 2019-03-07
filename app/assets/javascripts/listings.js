@@ -69,14 +69,16 @@ Listing.prototype.listingHTML = function() {
 };
 
 const nextListing = () => {
-  $(".js-next").click(() => {
+  $(".js-next").click(function(e) {
+    e.preventDefault();
     nextId = parseInt($(".js-next").attr("data-id")) + 1;
     showListing();
   });
 };
 
 const previousListing = () => {
-  $(".js-previous").click(() => {
+  $(".js-previous").click(function(e) {
+    e.preventDefault();
     nextId = parseInt($(".js-next").attr("data-id")) - 1;
     showListing();
   });
