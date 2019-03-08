@@ -37,23 +37,6 @@ class Listing {
   }
 }
 
-const createListing = () => {
-  $("form").submit(function(e) {
-    e.preventDefault();
-
-    let values = $(this).serialize();
-    let newListing = $.post("/listings", values);
-
-    newListing.done(function(response) {
-      let listing = response;
-      const newListing = new Listing(listing);
-      const newListingHtml = newListing.listingHTML();
-      document.getElementById("ajax-listings").innerHTML += newListingHtml;
-      $("form").trigger("reset");
-    });
-  });
-};
-
 Listing.prototype.listingHTML = function() {
   return `
     <ul>
