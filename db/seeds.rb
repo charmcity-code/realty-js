@@ -34,11 +34,11 @@ Appointment.create!([
   {date: "2019-01-10 18:30:00", buyer_id: 3, listing_id: 5},
   {date: "2019-04-02 16:15:00", buyer_id: 5, listing_id: 1},
   {date: "2019-03-18 19:00:00", buyer_id: 6, listing_id: 3},
-  {date: "2019-03-19 15:00:00", buyer_id: 7, listing_id: 2},
+  {date: "2019-03-19 15:00:00", buyer_id: 4, listing_id: 2},
   {date: "2019-03-09 17:00:00", buyer_id: 2, listing_id: 5},
   {date: "2019-03-13 18:00:00", buyer_id: 5, listing_id: 7},
   {date: "2019-03-17 18:00:00", buyer_id: 6, listing_id: 7},
-  {date: "2019-03-22 14:00:00", buyer_id: 7, listing_id: 7}
+  {date: "2019-03-22 14:00:00", buyer_id: 4, listing_id: 7}
 ])
 
 
