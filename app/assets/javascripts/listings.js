@@ -51,6 +51,23 @@ Listing.prototype.listingHTML = function() {
   `;
 };
 
+const createListing = () => {
+  $("#new_listing").submit(function(e) {
+    e.preventDefault();
+
+    let values = $(this).serialize();
+    let newListing = $.post("/listings", values);
+
+    newListing.done(function(response) {
+      let listing = response;
+      const newListing = new Listing(listing);
+      const newListingHtml = newListing.listingHTML();
+      document.getElementById("ajax-listings").innerHTML += newListingHtml;
+      $("form").trigger("reset");
+    });
+  });
+};
+
 const nextListing = () => {
   $(".js-next").click(function(e) {
     e.preventDefault();
@@ -80,8 +97,8 @@ const showListing = () => {
       `${response.city}, ${response.state} ${response.zip_code}`
     );
     $(".listingPropertyType").text("Property Type: " + response.property_type);
-    $(".numberBedrooms").text("Number of Bedrooms: " + response.bedrooms);
-    $(".numberBathrooms").text("Number of Bathrooms: " + response.bathrooms);
+    $(".listingBedrooms").text("Number of Bedrooms: " + response.bedrooms);
+    $(".listingBathrooms").text("Number of Bathrooms: " + response.bathrooms);
     $(".listingPrice").text(
       "List Price: $" + response.list_price.toLocaleString("en")
     );
