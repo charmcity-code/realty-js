@@ -2,6 +2,7 @@ $(function() {
   getListings();
   nextListing();
   previousListing();
+  sortListings();
 });
 
 let nextId;
@@ -12,14 +13,19 @@ const getListings = () => {
     url: "/listings",
     dataType: "json",
     success: function(response) {
-      response.forEach(listing => {
-        const newListing = new Listing(listing);
-        const newListingHtml = newListing.listingHTML();
-        document.getElementById("ajax-listings").innerHTML += newListingHtml;
-      });
+      displayListings(response);
     }
   });
   createListing();
+};
+
+const displayListings = response => {
+  response.forEach(listing => {
+    const newListing = new Listing(listing);
+    const newListingHtml = newListing.listingHTML();
+
+    document.getElementById("ajax-listings").innerHTML += newListingHtml;
+  });
 };
 
 class Listing {
@@ -28,12 +34,12 @@ class Listing {
     this.street = obj.street;
     this.city = obj.city;
     this.state = obj.state;
-    this.zip_code = obj.zip_code;
-    this.property_type = obj.property_type;
+    this.zipCode = obj.zip_code;
+    this.propertyType = obj.property_type;
     this.bedrooms = obj.bedrooms;
     this.bathrooms = obj.bathrooms;
-    this.list_price = obj.list_price;
-    this.created_at = obj.created_at;
+    this.listPrice = obj.list_price;
+    this.createdAt = obj.created_at;
   }
 }
 
@@ -41,10 +47,10 @@ Listing.prototype.listingHTML = function() {
   return `
     <ul>
     <li>
-      Date Listed: ${moment(this.created_at).format("MMM DD, YYYY")}<br>
+      Date Listed: ${moment(this.createdAt).format("MMM DD, YYYY")}<br>
       Property Location:<br>
       ${this.street}<br>
-      ${this.city}, ${this.state} ${this.zip_code}<br>
+      ${this.city}, ${this.state} ${this.zipCode}<br>
       <a href="/listings/${this.id}">Details</a>
     </li>
     </ul
@@ -54,7 +60,6 @@ Listing.prototype.listingHTML = function() {
 const createListing = () => {
   $("#new_listing").submit(function(e) {
     e.preventDefault();
-
     let values = $(this).serialize();
     let newListing = $.post("/listings", values);
 
@@ -120,5 +125,30 @@ const showListing = () => {
     }
     // re-set the id to current on the link
     $(".js-next").attr("data-id", response["id"]);
+  });
+};
+
+const sortListings = () => {
+  $("#sort").click(function() {
+    $.ajax({
+      type: "get",
+      url: "/listings",
+      dataType: "json",
+      success: function(response) {
+        response.sort(function(a, b) {
+          var x = a.state.toLowerCase();
+          var y = b.state.toLowerCase();
+          if (x < y) {
+            return -1;
+          }
+          if (x > y) {
+            return 1;
+          }
+          return 0;
+        });
+        document.getElementById("ajax-listings").innerHTML = "";
+        displayListings(response);
+      }
+    });
   });
 };
